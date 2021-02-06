@@ -1,4 +1,4 @@
-package com.example.jpademo.exception;
+package ada.edu.demo.webtest.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

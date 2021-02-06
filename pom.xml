@@ -8,10 +8,10 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>jpademo</artifactId>
+	<groupId>ada.edu.demo</groupId>
+	<artifactId>webtest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jpademo</name>
+	<name>webtest</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -36,14 +36,6 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<!--dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.12</version>
-		</dependency-->
-
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>

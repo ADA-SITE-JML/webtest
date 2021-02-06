@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/openjdk:11.0.1-jdk
 
-    working_directory: ~/jpademo
+    working_directory: ~/webtest
 
     steps:
       # git pull
@@ -21,7 +21,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: jpademo-{{ checksum "pom.xml" }}
+          key: webtest-{{ checksum "pom.xml" }}
 
       # package into a jar
       - run: mvn clean package
@@ -36,4 +36,4 @@ jobs:
       # store raw contents of src code
       - store_artifacts:
           path: target/classes
-          destination: jpademo
+          destination: webtest

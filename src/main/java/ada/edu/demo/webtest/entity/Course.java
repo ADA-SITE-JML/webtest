@@ -1,4 +1,4 @@
-package com.example.jpademo.entity;
+package ada.edu.demo.webtest.entity;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.example.jpademo.repository;
+package ada.edu.demo.webtest.repository;
 
-import com.example.jpademo.entity.Course;
+import ada.edu.demo.webtest.entity.Course;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CourseRepository extends CrudRepository<Course,Integer> {

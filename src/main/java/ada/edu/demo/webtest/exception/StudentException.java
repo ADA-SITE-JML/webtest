@@ -1,4 +1,4 @@
-package com.example.jpademo.exception;
+package ada.edu.demo.webtest.exception;
 
 public class StudentException extends Exception {
     Integer errorCode;

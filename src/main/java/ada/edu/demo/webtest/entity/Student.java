@@ -1,10 +1,9 @@
-package com.example.jpademo.entity;
+package ada.edu.demo.webtest.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 

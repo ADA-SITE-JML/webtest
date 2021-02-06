@@ -1,10 +1,9 @@
-package com.example.jpademo.controller;
+package ada.edu.demo.webtest.controller;
 
-import com.example.jpademo.entity.Course;
-import com.example.jpademo.entity.Student;
-import com.example.jpademo.exception.StudentException;
-import com.example.jpademo.repository.CourseRepository;
-import com.example.jpademo.repository.StudentRepository;
+import ada.edu.demo.webtest.entity.Course;
+import ada.edu.demo.webtest.entity.Student;
+import ada.edu.demo.webtest.repository.CourseRepository;
+import ada.edu.demo.webtest.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
