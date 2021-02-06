@@ -11,10 +11,6 @@ jobs:
       # git pull
       - checkout
 
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -29,6 +25,10 @@ jobs:
 
       # package into a jar
       - run: mvn clean package
+
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
