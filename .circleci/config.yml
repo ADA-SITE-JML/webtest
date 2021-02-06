@@ -8,8 +8,7 @@ jobs:
     working_directory: ~/webtest
 
     steps:
-      # git pull
-      - checkout
+      - checkout # git pull
 
       # Download and cache dependencies
       - restore_cache:
@@ -26,12 +25,10 @@ jobs:
       # package into a jar
       - run: mvn clean package
 
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Djib.to.auth.username=$DOCKER_USER \
+                                         -Djib.to.auth.password=$DOCKER_PASS \
+                                         -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
