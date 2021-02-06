@@ -1,33 +1,34 @@
-version: 2
+version: 2.1
+
 jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0.1-jdk
 
-    working_directory: ~/jpademo
+#    working_directory: ~/jpademo
 
     steps:
       # git pull
       - checkout
 
       # setup testing env
-      - setup_remote_docker:
-          docker_layer_caching: true
+#      - setup_remote_docker:
+#          docker_layer_caching: true
       - run:
           name: Login to DockerHub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - jpademo-{{ checksum "pom.xml" }}
+#      - restore_cache:
+#          keys:
+#            - jpademo-{{ checksum "pom.xml" }}
 
-      - run: mvn dependency:go-offline
+#      - run: mvn dependency:go-offline
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: jpademo-{{ checksum "pom.xml" }}
+#      - save_cache:
+#          paths:
+#            - ~/.m2
+#          key: jpademo-{{ checksum "pom.xml" }}
 
       # package into a jar
       - run: mvn clean package
