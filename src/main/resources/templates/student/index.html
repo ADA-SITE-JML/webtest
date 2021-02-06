@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<a>
+<h1>Students home page</h1>
+
+
+<br>
+<a th:text="${message}"/>
+    <br>
+    <br>
+<a href="/student/new">Add a student</a>
+    <br>
+    <form action="/student/update" method="GET">
+        Update student with ID <input type="text" name="id"/>
+        <input type="submit" value="Search">
+    </form>
+<br>
+<form action="/student/id" method="GET">
+    Get student by ID <input type="text" name="id"/>
+    <input type="submit" value="Search">
+</form>
+    <br>
+    <form action="/student/name" method="GET">
+        Get student by name <input type="text" name="name"/>
+        <input type="submit" value="Search">
+    </form>
+<br>
+<a href="/student/list">All students</a>
+    <br>
+    <a href="/student/list/active">All active students</a>
+
+    <form action="/student/search" method="GET">
+        Get student by first <input type="text" name="first"/>
+        or last <input type="text" name="last"/> name
+        <input type="submit" value="Search">
+    </form>
+
+
+    </body>
+
+</html>

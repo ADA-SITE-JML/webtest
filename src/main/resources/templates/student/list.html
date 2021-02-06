@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+</head>
+<body>
+
+<h1>The list of students</h1>
+<table style="width:20%">
+    <tr>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+    </tr>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.studentId}">0</td>
+        <td th:text="${student.firstName}">0</td>
+        <td th:text="${student.lastName}">0</td>
+        <td>
+            <select>
+                <option th:each="course : ${student.courses}" th:text="${course.courseName}" th:value="${course.courseId}">
+                </option>
+            </select>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

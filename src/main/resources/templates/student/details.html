@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Student data</title>
+    <style>
+        .error { color: #FF0000; }
+    </style>
+</head>
+<body>
+<h1>Add or modify student data</h1>
+
+
+<form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
+    <div th:if="${#fields.hasErrors('*')}">
+        <p class="error">Please Correct Errors Below</p>
+    </div>
+
+    Student ID: <input type="text" th:field="*{studentId}"/><br>
+    <span class="error" th:if="${#fields.hasErrors('studentId')}">
+        <ul>
+            <li th:each="err : ${#fields.errors('studentId')}" th:text="${err}"/>
+        </ul>
+    </span>
+    First name: <input type="text" th:field="*{firstName}"/><br>
+    <span class="error" th:if="${#fields.hasErrors('firstName')}">
+        <ul>
+            <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"/>
+        </ul>
+    </span>
+    Last name: <input type="text" th:field="*{lastName}"/><br>
+    <span class="error" th:if="${#fields.hasErrors('lastName')}">
+        <ul>
+            <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"/>
+        </ul>
+    </span>
+    Email: <input type="text" th:field="*{email}"/><br>
+    <span class="error" th:if="${#fields.hasErrors('email')}">
+        <ul>
+            <li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+        </ul>
+    </span>
+    <ul>
+        <li th:each="course : ${allCourses}">
+                <input type="checkbox" name="courses" th:checked="${student.courses.contains(course)}" th:value="${course.courseId}"/>
+                <label th:text="${course.courseName}"></label>
+        </li>
+    </ul>
+    <input type="submit" value="Save"/>
+</form>
+
+</body>
+</html>
