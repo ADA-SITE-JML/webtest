@@ -1,41 +1,47 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11.0.1-jdk
+version: 2.1
 
-    working_directory: ~/jpademo
+orbs:
+  maven: circleci/maven@0.0.12
 
-    steps:
-      # git pull
-      - checkout
+workflows:
+  maven_test:
+    jobs:
+      build:
+        docker:
+          - image: circleci/openjdk:11.0.1-jdk
 
-      # setup testing env
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+        working_directory: ~/jpademo
 
-      # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#            - jpademo-{{ checksum "pom.xml" }}
+        steps:
+          # git pull
+          - checkout
 
-      - run: mvn dependency:go-offline
+          # setup testing env
+          - setup_remote_docker:
+              docker_layer_caching: true
+          - run:
+              name: Login to DockerHub
+              command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-#      - save_cache:
-#          paths:
-#            - ~/.m2
-#          key: jpademo-{{ checksum "pom.xml" }}
+          # Download and cache dependencies
+          - restore_cache:
+              keys:
+                - jpademo-{{ checksum "pom.xml" }}
 
-      # package into a jar
-      - run: mvn clean package
+          - run: mvn dependency:go-offline
 
-      # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=webtest/jpademo:$CIRCLE_BUILD_NUM
+          - save_cache:
+              paths:
+                - ~/.m2
+              key: jpademo-{{ checksum "pom.xml" }}
 
-      # store raw contents of src code
-      - store_artifacts:
-          path: target/classes
-          destination: jpademo
+          # package into a jar
+          - run: mvn clean package
+
+          # build and push docker image to docker hub
+          - run: mvn clean compile jib:build -Dimage=webtest/jpademo:$CIRCLE_BUILD_NUM
+
+          # store raw contents of src code
+          - store_artifacts:
+              path: target/classes
+              destination: jpademo
