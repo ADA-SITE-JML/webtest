@@ -77,9 +77,6 @@
 					<from>
 						<image>openjdk:11-jdk-slim</image>
 					</from>
-					<to>
-						<credHelper>$DOCKER_PASS</credHelper>
-					</to>
 					<container>
 						<ports>
 							<port>8080</port>

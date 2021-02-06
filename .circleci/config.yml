@@ -27,15 +27,8 @@ jobs:
       - run: mvn clean package
 
       - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
-      - run:
-          name: Decrpyt Secrets
-          command: openssl enc -d -aes-256-ecb -md md5 -in src/main/resources/application.properties.secrets -out src/main/resources/application.properties -k $SECRETS_KEY
-
-      # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
+          name: Login to DockerHub and push image
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS && mvn clean compile jib:build -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
