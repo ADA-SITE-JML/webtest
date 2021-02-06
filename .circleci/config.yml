@@ -18,16 +18,16 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - jpademo-{{ checksum "pom.xml" }}
+#      - restore_cache:
+#          keys:
+#            - jpademo-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: jpademo-{{ checksum "pom.xml" }}
+#      - save_cache:
+#          paths:
+#            - ~/.m2
+#          key: jpademo-{{ checksum "pom.xml" }}
 
       # package into a jar
       - run: mvn clean package
