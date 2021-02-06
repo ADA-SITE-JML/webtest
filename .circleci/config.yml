@@ -31,7 +31,7 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Djib.from.auth.username=jhasanov -Djib.from.auth.password=d1m1n1sh3d -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
