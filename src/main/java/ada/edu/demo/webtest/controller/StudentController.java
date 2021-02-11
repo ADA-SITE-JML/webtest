@@ -54,7 +54,7 @@ public class StudentController {
     public String getSingleStudent(Model model,@RequestParam Integer id) {
         Optional<Student> result = studentRepo.findById(id);
         if (result.isPresent()) {
-            Student studenta = result.get();
+            Student student = result.get();
             List<Student> stList = new ArrayList<Student>();
             stList.add(student);
             model.addAttribute("students",stList);
