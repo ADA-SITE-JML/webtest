@@ -73,22 +73,6 @@
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>2.7.1</version>
-				<configuration>
-					<from>
-						<image>openjdk:11-jdk-slim</image>
-					</from>
-					<to>
-						<auth>
-							<username>jhasanov</username>
-							<password>d1m1n1sh3d</password>
-						</auth>
-					</to>
-					<container>
-						<ports>
-							<port>8080</port>
-						</ports>
-					</container>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
