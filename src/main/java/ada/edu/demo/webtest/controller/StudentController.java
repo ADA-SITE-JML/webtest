@@ -56,7 +56,7 @@ public class StudentController {
         if (result.isPresent()) {
             Student student = result.get();
             List<Student> stList = new ArrayList<Student>();
-            stList.add(student);
+            stList.add(student2);
             model.addAttribute("students",stList);
         }
         return "student/list";
