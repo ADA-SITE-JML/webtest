@@ -14,6 +14,8 @@ public class Course {
 
     String courseName;
 
+    Integer credits;
+
     @ManyToMany(mappedBy = "courses")
     List<Student> students;
 }

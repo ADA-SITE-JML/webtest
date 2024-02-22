@@ -10,8 +10,10 @@
 <table style="width:20%">
     <tr>
         <th>ID</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Courses</th>
+        <th>Credits</th>
     </tr>
     <tr th:each="student : ${students}">
         <td th:text="${student.studentId}">0</td>
@@ -23,6 +25,7 @@
                 </option>
             </select>
         </td>
+        <td th:text="${student.totalCredits}">0</td>
     </tr>
 </table>
 </body>

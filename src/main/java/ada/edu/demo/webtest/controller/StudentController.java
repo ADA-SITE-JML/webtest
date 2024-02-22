@@ -4,6 +4,7 @@ import ada.edu.demo.webtest.entity.Course;
 import ada.edu.demo.webtest.entity.Student;
 import ada.edu.demo.webtest.repository.CourseRepository;
 import ada.edu.demo.webtest.repository.StudentRepository;
+import ada.edu.demo.webtest.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class StudentController {
 
     @Autowired
-    StudentRepository studentRepo;
+    StudentService studentService;
 
     @Autowired
     CourseRepository courseRepo;
@@ -36,7 +37,7 @@ public class StudentController {
 
     @GetMapping("/list")
     public String getStudentList(Model model) {
-        Iterable<Student> students = studentRepo.findAll();
+        Iterable<Student> students = studentService.getStudentList();
         model.addAttribute("students",students);
 
         return "student/list";
@@ -44,27 +45,26 @@ public class StudentController {
 
     @GetMapping("/list/active")
     public String getAvailableStudentList(Model model) {
-        Iterable<Student> students = studentRepo.findAllActive();
-        model.addAttribute("students",students);
+        Iterable<Student> students = studentService.getActiveStudents();
 
         return "student/list";
     }
 
     @GetMapping("/id")
     public String getSingleStudent(Model model,@RequestParam Integer id) {
-        Optional<Student> result = studentRepo.findById(id);
-        if (result.isPresent()) {
-            Student student = result.get();
-            List<Student> stList = new ArrayList<Student>();
+        List<Student> stList = new ArrayList<Student>();
+
+        Student student = studentService.getStudentById(id);
+        if (student != null)
             stList.add(student);
-            model.addAttribute("students",stList);
-        }
+
+        model.addAttribute("students",stList);
         return "student/list";
     }
 
     @GetMapping("/name")
     public String getSingleStudent(Model model,@RequestParam String name) {
-        Iterable<Student> students = studentRepo.findByNameCase("%"+name+"%");
+        Iterable<Student> students = studentService.getStudentByName(name);
         model.addAttribute("students",students);
         return "student/list";
     }
@@ -77,14 +77,13 @@ public class StudentController {
 
     @GetMapping("/update")
     public String showUpdatePage(Model model,@RequestParam Integer id) {
-        Optional<Student> result = studentRepo.findById(id);
-        if (result.isPresent()) {
-            Student st = result.get();
-            model.addAttribute("student",st);
+        Student student  = studentService.getStudentById(id);
+        if (student == null)
+            student = new Student();
+        model.addAttribute("student",student);
 
-            Iterable<Course> courses = courseRepo.findAll();
-            model.addAttribute("allCourses",courses);
-        }
+        Iterable<Course> courses = courseRepo.findAll();
+        model.addAttribute("allCourses",courses);
 
         return "student/details";
     }
@@ -99,15 +98,15 @@ public class StudentController {
 
         logger.debug("saveStudent() : no errors");
 
-        studentRepo.save(studentData);
+        Student savedStudent = studentService.saveStudent(studentData);
 
-        logger.info("saveStudent() : saved -> "+studentData.getFirstName());
+        logger.info("saveStudent() : saved -> "+savedStudent.getFirstName());
         return "student/index";
     }
 
     @GetMapping("/search")
     public String searchStudents(Model model,@RequestParam("first") String firstName,@RequestParam("last")  String lastName) {
-        List<Student> students = studentRepo.findByFirstNameOrLastNameIgnoreCase(firstName,lastName);
+        List<Student> students = studentService.getStudentsByNames(firstName,lastName);
         model.addAttribute("students",students);
 
         return "student/list";

@@ -44,9 +44,10 @@
         <li th:each="course : ${allCourses}">
                 <input type="checkbox" name="courses" th:checked="${student.courses.contains(course)}" th:value="${course.courseId}"/>
                 <label th:text="${course.courseName}"></label>
+            (<label th:text="${course.credits}"></label>)
         </li>
     </ul>
-    <input type="submit" value="Save"/>
+    <input type="submit" id="submit" value="Save"/>
 </form>
 
 </body>

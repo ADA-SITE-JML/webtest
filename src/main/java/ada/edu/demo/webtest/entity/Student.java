@@ -4,8 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Data
@@ -37,5 +36,16 @@ public class Student {
                     joinColumns = @JoinColumn(name = "ST_ID"),
                     inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     List<Course> courses;
+
+
+    public Integer getTotalCredits() {
+        Integer credits = 0;
+
+        for (Course course : courses) {
+            credits += course.getCredits();
+        }
+
+        return credits;
+    }
 }
 
