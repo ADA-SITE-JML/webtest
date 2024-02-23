@@ -1,3 +1,3 @@
 mvn clean test
-mvn build:package
+mvn package
 docker build -t springio/webtest .
