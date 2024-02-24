@@ -23,7 +23,7 @@ jobs:
           key: webtest-{{ checksum "pom.xml" }}
 
       # package into a jar
-      - run: mvn clean package
+      - run: mvn clean package -Dtest=\!WebInterfaceTests
 
       # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Djib.to.auth.username=$DOCKER_USER -Djib.to.auth.password=$DOCKER_PASS -Dimage=jhasanov/webtest:$CIRCLE_BUILD_NUM

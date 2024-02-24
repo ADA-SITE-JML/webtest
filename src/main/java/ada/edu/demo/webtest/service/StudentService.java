@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class StudentService {
@@ -50,6 +53,14 @@ public class StudentService {
 
     public List<Student> getStudentsByNames(String firstName,String lastName){
         return studentRepo.findByFirstNameOrLastNameIgnoreCase(firstName,lastName);
+    }
+
+    public List<Student> getStudentByEitherName(String firstName,String lastName) {
+        Iterable<Student> students = studentRepo.findAll();
+        List<Student> result = StreamSupport.stream(students.spliterator(), false)
+                .filter(s -> s.getFirstName().equals(firstName) || s.getLastName().equals(lastName))
+                .collect(Collectors.toList());
+        return result;
     }
 
 }

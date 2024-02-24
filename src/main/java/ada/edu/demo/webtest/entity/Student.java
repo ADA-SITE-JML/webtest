@@ -1,6 +1,8 @@
 package ada.edu.demo.webtest.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -8,6 +10,8 @@ import java.util.*;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="TELEBELER")
 public class Student {
