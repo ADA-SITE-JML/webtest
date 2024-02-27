@@ -36,19 +36,19 @@ class WebInterfaceTests {
 		// Check if such a field exists
 		assertNotNull(firstNameInput);
 
-		try {
+//		try {
 			studentIdInput.sendKeys("1");
-			Thread.sleep(2000);
-			firstNameInput.sendKeys("Jamal");
-			Thread.sleep(2000);
-			lastNameInput.sendKeys("Hasanov");
-			Thread.sleep(2000);
-			emailInput.sendKeys("jhasanov@ada.edu.az");
-			Thread.sleep(2000);
-		}
-		catch (Exception ex) {
-			System.out.println(ex);
-		}
+//			Thread.sleep(2000);
+			firstNameInput.sendKeys("Nigar");
+//			Thread.sleep(2000);
+			lastNameInput.sendKeys("Salayeva");
+//			Thread.sleep(2000);
+			emailInput.sendKeys("ns@ada.edu.az");
+//			Thread.sleep(2000);
+//		}
+//		catch (Exception ex) {
+//			System.out.println(ex);
+//		}
 
 		// Find and submit the form (assuming there's a submit button with a specific attribute)
 		WebElement submitButton = webDriver.findElement(By.id("submit"));
@@ -61,18 +61,19 @@ class WebInterfaceTests {
 	public void CheckUser() {
 		// Check if the student is added
 		webDriver.get("http://localhost:"+port+"/student/list");
-		List<WebElement> bodyElementFName = webDriver.findElements(By.xpath("//a[contains(text(), 'Jamal')]"));
-		List<WebElement> bodyElementLName = webDriver.findElements(By.xpath("//a[contains(text(), 'Hasanov')]"));
+		List<WebElement> bodyElementFName = webDriver.findElements(By.xpath("//*[contains(text(), 'Nigar')]"));
+		List<WebElement> bodyElementLName = webDriver.findElements(By.xpath("//*[contains(text(), 'Salayeva')]"));
+		System.out.println("Element result"+bodyElementLName);
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			throw new RuntimeException(e);
+//		}
 
 		// Check if the text "Jamal" is present in the page content
-		assertNotNull(bodyElementFName);
-		assertNotNull(bodyElementLName);
+		assert(bodyElementFName.size() == 1);
+		assert(bodyElementLName.size() == 1);
 	}
 
 }
