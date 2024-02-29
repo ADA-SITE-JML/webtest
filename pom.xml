@@ -102,7 +102,7 @@
 						<version>2.7.1</version>
 						<configuration>
 							<from>
-								<image>openjdk:11-jdk-slim</image>
+								<image>openjdk:17-jdk-slim</image>
 							</from>
 							<container>
 								<ports>
