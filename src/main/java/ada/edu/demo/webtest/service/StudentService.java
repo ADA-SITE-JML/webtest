@@ -58,7 +58,7 @@ public class StudentService {
     public List<Student> getStudentByEitherName(String firstName,String lastName) {
         Iterable<Student> students = studentRepo.findAll();
         List<Student> result = StreamSupport.stream(students.spliterator(), false)
-                .filter(s -> s.getFirstName().equals(firstName) || s.getLastName().equals(lastName))
+                .filter(s -> s.getFirstName().equals(firstName) || s.getLastName().equals(firstName))
                 .collect(Collectors.toList());
         return result;
     }
